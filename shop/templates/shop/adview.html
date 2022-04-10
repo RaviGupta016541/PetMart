@@ -1,0 +1,31 @@
+{% extends 'shop/base.html' %}
+{% block css %}
+{% endblock %}
+
+{% block title%} Ad view {% endblock %}
+
+{% block body %}
+
+{% load static %}
+
+
+<div class="container my-4">
+    <div class="row">
+    <div class="col-md-4">
+    <div class="row">
+       <img src="/media//{{Ad.image}}" width="233px" height="385px">
+    </div>
+        </div>
+    <div class="col-md-8">
+        <h4>{{Ad.petCatgory}}</h4>
+        <h3>{{Ad.addName}}</h3>
+        <p>{{Ad.pub_date}}</p>
+        <p>{{Ad.addDescription}}</p>
+    </div>
+        </div>
+</div>
+{% endblock %}
+{% block js %}
+<script>
+</script>
+{% endblock %}
