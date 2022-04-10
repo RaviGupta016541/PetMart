@@ -78,14 +78,14 @@ def handleSignUp(request):
         city=request.POST['city']
         # check for errorneous input
         if len(username)<10:
-            messages.danger(request, " Your user name must be under 10 characters")
+            messages.error(request, " Your user name must be under 10 characters")
             return redirect('/')
 
         if not username.isalnum():
-            messages.danger(request, " User name should only contain letters and numbers")
+            messages.error(request, " User name should only contain letters and numbers")
             return redirect('/')
         if (pass1!= pass2):
-             messages.danger(request, " Passwords do not match")
+             messages.error(request, " Passwords do not match")
              return redirect('/')
         
         # Create the user
@@ -111,14 +111,14 @@ def handeLogin(request):
         if user is not None:
             login(request, user)
             messages.success(request, "Successfully Logged In")
-            return redirect("home")
+            return redirect('/')
         else:
             messages.error(request, "Invalid credentials! Please try again")
-            return redirect("home")
+            return redirect('/')
 
     return HttpResponse("404- Not found")
 
 def handelLogout(request):
     logout(request)
     messages.success(request, "Successfully logged out")
-    return redirect('home')
+    return redirect('/')

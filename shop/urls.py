@@ -10,7 +10,7 @@ urlpatterns = [
     path("addpost/",views.addpost,name="addpost"),
     path("adview/<int:adid>",views.adview,name="adview"),
     path('signup/', views.handleSignUp, name="handleSignUp"),
-    path('login', views.handeLogin, name="handleLogin"),
+    path('login/', views.handeLogin, name="handleLogin"),
     path('logout', views.handelLogout, name="handleLogout"),
 ]
 
