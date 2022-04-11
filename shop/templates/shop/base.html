@@ -80,21 +80,43 @@
           
         </div>
         <ul>
+          {% if user.is_authenticated %} 
+          {% comment %} <ul> {% endcomment %}
+            <ul class="navbar-nav ml-auto">
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Welcome {{request.user}}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="/shop/logout">Logout</a>
+                  
+                </div>
+              </li>
+
+      
+          </ul>
+
+
+
+
+          
+          {%else%}
           <!-- Button to  trigger Login modal -->
-<button type="button" class="btn btn-success mr-2" data-toggle="modal" data-target="#loginModal">
-  Login
-  </button>
-  
-  <button type="button" class="btn btn-success mr-2" data-toggle="modal" data-target="#signupModal">
-  SignUp
-  </button>
+          <button type="button" class="btn btn-success mr-2" data-toggle="modal" data-target="#loginModal">
+            Login
+          </button>
+          <!-- Button to  trigger sign up modal -->
+          
+          <button type="button" class="btn btn-success mr-2" data-toggle="modal" data-target="#signupModal">
+            SignUp
+          </button>
+          {% endif %}
+
       </div>
     </nav>
 
     {% for message in messages  %}    
-    {% comment %} if (message.tags =='error'): {% endcomment %}
-        {% comment %} message.tags='danger' {% endcomment %}
-
     {% if message.tags == "error" %}
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
     {%else%}
