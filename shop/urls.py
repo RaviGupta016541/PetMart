@@ -12,6 +12,7 @@ urlpatterns = [
     path('signup/', views.handleSignUp, name="handleSignUp"),
     path('login/', views.handeLogin, name="handleLogin"),
     path('logout', views.handelLogout, name="handleLogout"),
+    path('addAd', views.addAd, name="addAd"),
 ]
 
  
