@@ -101,6 +101,11 @@ def handleSignUp(request):
     else:
         return HttpResponse("404 - Not found")
 
+def addAd(request):
+    return render(request, 'shop/addAd.html')
+
+
+
 def handeLogin(request):
     if request.method=="POST":
         # Get the post parameters
