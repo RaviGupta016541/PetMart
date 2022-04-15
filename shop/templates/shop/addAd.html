@@ -1,0 +1,79 @@
+{% extends 'shop/base.html' %}
+{% block css %} .headings{ text-align:center;
+margin:15px; } form{ border: 2px solid blue; padding :5px; border-radius: 10px;
+} 
+{% endblock %} 
+{% block title%} Create Ad{% endblock %} 
+
+{% block body %}
+
+<div class="container">
+  <div class="headings">
+    <h1>PUBLISH YOUR AD NOW FOR FREE!</h1>
+    <h5>ENTER YOUR AD DEFAILTS BELOW</h5>
+  </div>
+
+  <form>
+    <h6>Choose Ad Type:</h6>
+
+    <div class="row">
+      <div class="form-check col-2 mx-3">
+        <input class="form-check-input" type="radio" name="ChooseAd" id="PetsSellAd" value="Pets Sell Ad" checked />
+        <label class="form-check-label" for="PetsSellAd"> Pets Sell Ad </label>
+      </div>
+      <div class="form-check col-2">
+        <input class="form-check-input" type="radio" name="ChooseAd" id="PetAdoption" value=" Pet Adoption" />
+        <label class="form-check-label" for="PetAdoption"> Pet Adoption </label>
+      </div>
+      <div class="form-check col-2">
+        <input class="form-check-input" type="radio" name="ChooseAd" id="LostPetsAd" value="Lost Pets Ad" />
+        <label class="form-check-label" for="LostPetsAd"> Lost Pets Ad </label>
+      </div>
+      <div class="form-check col-2">
+        <input class="form-check-input" type="radio" name="ChooseAd" id="PetFoodAccessoriesAd"
+          value="Pet Food/Accessories Ad" />
+        <label class="form-check-label" for="PetFoodAccessoriesAd">
+          Pet Food/Accessories Ad
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="exampleInputEmail1">Ad title</label>
+      <input type="text" class="form-control" id="addName" placeholder="Enter title here" />
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Category</label>
+      <input type="text" class="form-control" id="petCatgory" placeholder="Enter category here" />
+    </div>
+    <div class="form-group">
+      <label for="text">Description</label>
+      <textarea class="form-control" aria-label="With textarea" id="addDescription" placeholder="Enter Description here" ></textarea>
+      {% comment %} <input type="text" class="form-control" id="addDescription" placeholder="Enter Description here" /> {% endcomment %}
+    </div>
+    <div class="form-group">
+      <label for="text">State</label>
+
+      <input type="text" class="form-control" id="state" name="state" placeholder="Enter Your State" required>
+    </div>
+    <div class="form-group">
+      <label for="text">City</label>
+      <input type="text" class="form-control" id="city" name="city" placeholder="Enter Your City" required>
+    </div>
+    <label for="text">Price</label>
+    <div class="input-group mb-3">
+      <span class="input-group-text">₹</span>
+      <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+    </div>
+    <label for="text">upload photo</label>
+    <div class="custom-file mb-3">
+      <input type="file" class="custom-file-input" id="validatedCustomFile" required>
+      <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+      <div class="invalid-feedback">Example invalid custom file feedback</div>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+{% endblock %} 
