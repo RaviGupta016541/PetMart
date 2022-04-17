@@ -1,45 +1,49 @@
 {% extends 'shop/base.html' %}
+
+
+
+
 {% block css %} .headings{ text-align:center;
-margin:15px; } form{ border: 2px solid blue; padding :5px; border-radius: 10px;
+margin:15px; } form{ border: 2px solid blue; padding :5px; border-radius: 10px; margin-bottom:20px;padding:5px;
 } 
 {% endblock %} 
 {% block title%} Create Ad{% endblock %} 
 
 {% block body %}
 
-{% comment %} {% if user.is_authenticated %} {% endcomment %}
-
-<div class="container">
+<div class="container" >
   <div class="headings">
     <h1>PUBLISH YOUR AD NOW FOR FREE!</h1>
     <h5>ENTER YOUR AD DEFAILTS BELOW</h5>
   </div>
 
   <form method="post"  enctype="multipart/form-data" action="/shop/saveAds">
-    <h6>Choose Ad Type:</h6>
+    {% comment %} <h6>Choose Ad Type:</h6> {% endcomment %}
+    <label class="form-check-label" for="PetsSellAd"> Choose Ad Type: </label
     {% csrf_token %}
     <div class="row">
       <div class="form-check col-2 mx-3">
         <input class="form-check-input" type="radio" name="ChooseAd" id="PetsSellAd" value="Pets Sell Ad" checked />
         <label class="form-check-label" for="PetsSellAd"> Pets Sell Ad </label>
       </div>
-      <div class="form-check col-2">
+      <div class="form-check col-2 mx-3">
         <input class="form-check-input" type="radio" name="ChooseAd" id="PetAdoption" value=" Pet Adoption" />
-        <label class="form-check-label" for="PetAdoption"> Pet Adoption </label>
+        <label class="form-check-label" for="PetAdoption"> Pet Adoption Ad</label>
       </div>
-      <div class="form-check col-2">
+      <div class="form-check col-2 mx-3">
         <input class="form-check-input" type="radio" name="ChooseAd" id="LostPetsAd" value="Lost Pets Ad" />
         <label class="form-check-label" for="LostPetsAd"> Lost Pets Ad </label>
       </div>
-      <div class="form-check col-2">
+      <div class="form-check col-3 mx-3">
         <input class="form-check-input" type="radio" name="ChooseAd" id="PetFoodAccessoriesAd"
-          value="Pet Food/Accessories Ad" />
+        value="Pet Food/Accessories Ad" />
         <label class="form-check-label" for="PetFoodAccessoriesAd">
           Pet Food/Accessories Ad
         </label>
       </div>
     </div>
-
+  <br>
+    
     <div class="form-group">
       <label for="exampleInputEmail1">Ad title</label>
       <input type="text" class="form-control" id="addName" name="addName" placeholder="Enter title here" />
@@ -65,12 +69,13 @@ margin:15px; } form{ border: 2px solid blue; padding :5px; border-radius: 10px;
     <label for="text">Price</label>
     <div class="input-group mb-3">
       <span class="input-group-text">₹</span>
-      <input type="text" class="form-control"  name="price" aria-label="Dollar amount (with dot and two decimal places)">
+      <input type="text" class="form-control"  name="price" placeholder="Enter selling price" aria-label="Dollar amount (with dot and two decimal places)">
     </div>
     <label for="text">upload photo</label>
     <div class="custom-file mb-3">
-      <input type="file" class="custom-file-input" accept=".jpg, .png " name="img" id="validatedCustomFile" >
-      <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+      <input type="file" class="custom-file-input" accept=".jpg, .png " name="img" id="imageFile"  onchange="changeName()">
+      {% comment %} <input type="file" class="custom-file-input" accept=".jpg, .png " name="img" id="imageFile"  > {% endcomment %}
+      <label class="custom-file-label" for="validatedCustomFile" id="imageFileLable">Choose file...</label>
       <div class="invalid-feedback">Example invalid custom file feedback</div>
     </div>
     
@@ -78,20 +83,10 @@ margin:15px; } form{ border: 2px solid blue; padding :5px; border-radius: 10px;
   </form>
 </div>
 
-{% comment %} 
-{% else %} {% endcomment %}
-
-{% comment %} {% for message in messages  %}    
-    {% if message.tags == "error" %}
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-    {%else%}
-    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-      {% endif %}
-          <strong>Message : </strong> {{ message }}
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-    {% endfor %}  {% endcomment %}
-    {% endblock %} 
-
+{% endblock %}  
+{% block script %} 
+function changeName() {
+  let  namefile=$('#imageFile')[0].files[0].name;
+    document.getElementById("imageFileLable").innerHTML=namefile;
+}
+{% endblock %}
