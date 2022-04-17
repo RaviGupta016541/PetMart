@@ -13,6 +13,7 @@ urlpatterns = [
     path('login/', views.handeLogin, name="handleLogin"),
     path('logout', views.handelLogout, name="handleLogout"),
     path('addAd', views.addAd, name="addAd"),
+    path('saveAds', views.saveAds, name="saveAds"),
 ]
 
  

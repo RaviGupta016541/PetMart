@@ -1,3 +1,5 @@
+import datetime
+from mimetypes import add_type
 from tkinter.messagebox import Message
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
@@ -65,7 +67,7 @@ def adview(request,adid):
 
 def handleSignUp(request):
     if request.method=="POST":
-        print("inside handle bro 11 ")
+       
         # Get the post parameters
         username=request.POST['username']
         email=request.POST['email']
@@ -74,8 +76,6 @@ def handleSignUp(request):
         pass1=request.POST['pass1']
         pass2=request.POST['pass2']
         pno=request.POST['pno']
-        state=request.POST['state']
-        city=request.POST['city']
         # check for errorneous input
         if len(username)<10:
             messages.error(request, " Your user name must be under 10 characters")
@@ -94,7 +94,7 @@ def handleSignUp(request):
         myuser.last_name= lname
         myuser.PhoneNo=pno
         myuser.save()
-        print("inside handle bro 22")
+        
         messages.success(request, " Your account has been successfully created")
         return redirect('/')
 
@@ -102,9 +102,40 @@ def handleSignUp(request):
         return HttpResponse("404 - Not found")
 
 def addAd(request):
+    
+        # if user is not None:
+        #     login(request, user)
+        #     messages.success(request, "Successfully Logged In")
+        #     return redirect('/')
+        # else:
+        #     messages.error(request, "Invalid credentials! Please try again")
+        #     return redirect('/')
+
+    #return HttpResponse("404- Not found")
+    if request.user.is_authenticated:
+        return render(request, 'shop/addAd.html')
+    else:
+        messages.error(request, "First you need to login than you can post a Ad")
+        return redirect('/')
+    
+
+def saveAds(request):
+    if request.method=="POST":
+        adType=request.POST.get('ChooseAd')
+        addName=request.POST.get('addName')
+        petCatgory=request.POST.get('petCatgory')
+        addDescription=request.POST.get('addDescription')
+        userId=request.user.id
+        state=request.POST.get('state')
+        city=request.POST.get('city')
+        price=request.POST.get('price')
+        pub_date=datetime.datetime.now().date()
+        image=request.FILES['img']
+        data=Adds(adType=adType,addName=addName,userId=userId,pub_date=pub_date,petCatgory=petCatgory,
+                  addDescription =addDescription,state=state,city=city,price=price,image=image)
+        data.save()
+        messages.success(request, "Your Ad has been successfully created")
     return render(request, 'shop/addAd.html')
-
-
 
 def handeLogin(request):
     if request.method=="POST":
