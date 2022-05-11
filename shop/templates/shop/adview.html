@@ -1,5 +1,17 @@
 {% extends 'shop/base.html' %}
 {% block css %}
+.content {
+    background-color:red;
+    padding: 20px 5% 80px;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 0 auto;
+    flex: 1 0 auto;
+    width: 100%;
+    display: block;
+}
+#userDetails{
+    text-align:center;
+}
 {% endblock %}
 
 {% block title%} Ad view {% endblock %}
@@ -11,19 +23,35 @@
 
 <div class="container my-4">
     <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
     <div class="row">
        <img src="/media//{{Ad.image}}" width="233px" height="385px">
     </div>
         </div>
-    <div class="col-md-8">
-        <h4>{{Ad.petCatgory}}</h4>
-        <h3>{{Ad.addName}}</h3>
+    <div class="col-md-6">
+        <h1>{{Ad.petCatgory|capfirst}}</h1>
+        <h3>{{Ad.addName|title}}</h3>
         <p>{{Ad.pub_date}}</p>
         <p>{{Ad.addDescription}}</p>
     </div>
+    <div class="col-md-3" id="userDetails">
+        
+        <h6>India/{{Ad.state}}/{{Ad.city}}</h6>
+        <h6></h6>
+        <br>
+        <h3>{{User.first_name|title}}  {{User.last_name|title}}</h3>
+        <h5>{{User.email}}</h5>
+        <h4>{{Ad.pno}}</h4>
+        <br>
+        {% if Ad.price != 0 %}
+        <h2>Price: {{Ad.price}}</h2>
+        {% endif %} 
+    </div>
         </div>
 </div>
+
+
+
 {% endblock %}
 {% block js %}
 <script>

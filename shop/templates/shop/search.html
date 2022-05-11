@@ -22,8 +22,13 @@
       <div class="card-body">
         <h5 class="card-title">{{i.addName}}</h5>
         <p class="card-text">{{i.addDescription}}</p>
-        <button id="pr{{i.id}}" class="btn btn-primary cart">More details</button>
+
+        <a href="/shop/adview/{{i.id}}">
+        <button id="vd{{i.id}}" class="btn btn-primary cart">More details</button>
+        </a>
+        
       </div>
+      
     </div>
 </div>
 {% empty %}

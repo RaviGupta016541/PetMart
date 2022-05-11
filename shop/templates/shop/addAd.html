@@ -4,7 +4,8 @@
 
 
 {% block css %} .headings{ text-align:center;
-margin:15px; } form{ border: 2px solid blue; padding :5px; border-radius: 10px; margin-bottom:20px;padding:5px;
+margin:15px; } 
+form{ border: 2px solid blue; padding :5px; border-radius: 10px; margin-bottom:20px;padding:5px;
 } 
 {% endblock %} 
 {% block title%} Create Ad{% endblock %} 
@@ -19,8 +20,8 @@ margin:15px; } form{ border: 2px solid blue; padding :5px; border-radius: 10px; 
 
   <form method="post"  enctype="multipart/form-data" action="/shop/saveAds">
     {% comment %} <h6>Choose Ad Type:</h6> {% endcomment %}
-    <label class="form-check-label" for="PetsSellAd"> Choose Ad Type: </label
-    {% csrf_token %}
+    {% csrf_token  %}
+    <label class="form-check-label" for="PetsSellAd"> Choose Ad Type: </label>
     <div class="row">
       <div class="form-check col-2 mx-3">
         <input class="form-check-input" type="radio" name="ChooseAd" id="PetsSellAd" value="Pets Sell Ad" checked />
@@ -78,7 +79,10 @@ margin:15px; } form{ border: 2px solid blue; padding :5px; border-radius: 10px; 
       <label class="custom-file-label" for="validatedCustomFile" id="imageFileLable">Choose file...</label>
       <div class="invalid-feedback">Example invalid custom file feedback</div>
     </div>
-    
+    <div class="form-group">
+      <label for="pno">Phone Number</label>
+      <input type="text" class="form-control" id="pno" name="pno" placeholder="Enter Your Mobile Number" required>
+    </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>

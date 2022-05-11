@@ -14,6 +14,7 @@ urlpatterns = [
     path('logout', views.handelLogout, name="handleLogout"),
     path('addAd', views.addAd, name="addAd"),
     path('saveAds', views.saveAds, name="saveAds"),
+    path('Adoption', views.Adoption, name="Adoption"),
 ]
 
  

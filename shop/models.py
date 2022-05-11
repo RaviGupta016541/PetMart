@@ -9,6 +9,7 @@ class Adds(models.Model):
     petCatgory=models.CharField(max_length=50,default="")
     addDescription=models.CharField(max_length=300,default="")
     userId=models.IntegerField()
+    pno=models.CharField(max_length=12,default="")
     state=models.CharField(max_length=50,default="")
     city=models.CharField(max_length=50,default="")
     price=models.IntegerField(default=0)

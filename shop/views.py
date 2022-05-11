@@ -62,7 +62,18 @@ def addpost(request):
 def adview(request,adid):
     #return HttpResponse("this is addpview")
     ad = Adds.objects.filter(id=adid)
-    params = {'Ad':ad[0]}
+    ad2 = Adds.objects.filter(id=adid)\
+            .values_list('userId', flat=True)
+    
+    print("----")
+    #my_values = [item.userId for item in ad]
+    print(ad2[0])
+    idOfUser=Adds.userId
+    print(idOfUser)
+    userdetails=User.objects.filter(id=ad2[0])
+    print(userdetails)
+    params = {'Ad':ad[0],'User':userdetails[0]}
+    print("params ke anddar hai",params,params['Ad'])
     return render(request, 'shop/adview.html',params)
 
 def handleSignUp(request):
@@ -75,7 +86,7 @@ def handleSignUp(request):
         lname=request.POST['lname']
         pass1=request.POST['pass1']
         pass2=request.POST['pass2']
-        pno=request.POST['pno']
+        
         # check for errorneous input
         if len(username)<10:
             messages.error(request, " Your user name must be under 10 characters")
@@ -92,7 +103,7 @@ def handleSignUp(request):
         myuser = User.objects.create_user(username, email, pass1)
         myuser.first_name= fname
         myuser.last_name= lname
-        myuser.PhoneNo=pno
+        # myuser.mobile_number=pno
         myuser.save()
         
         messages.success(request, " Your account has been successfully created")
@@ -126,13 +137,14 @@ def saveAds(request):
         petCatgory=request.POST.get('petCatgory')
         addDescription=request.POST.get('addDescription')
         userId=request.user.id
+        pno=request.POST.get('pno')
         state=request.POST.get('state')
         city=request.POST.get('city')
         price=request.POST.get('price')
         pub_date=datetime.datetime.now().date()
         image=request.FILES['img']
         data=Adds(adType=adType,addName=addName,userId=userId,pub_date=pub_date,petCatgory=petCatgory,
-                  addDescription =addDescription,state=state,city=city,price=price,image=image)
+                  addDescription =addDescription,state=state,city=city,price=price,image=image,pno=pno)
         data.save()
         messages.success(request, "Your Ad has been successfully created")
     return render(request, 'shop/addAd.html')
@@ -158,3 +170,24 @@ def handelLogout(request):
     logout(request)
     messages.success(request, "Successfully logged out")
     return redirect('/')
+
+def Adoption(request):
+    allAds = []
+    PetAdoptionAdd = Adds.objects.filter(adType="Pet Adoption")
+    print(PetAdoptionAdd)
+    # cats = {item['petCatgory'] for item in categoryAdds}
+    # for cat in cats:
+    #     ad = Adds.objects.filter(petCatgory=cat)
+    #     n = len(ad)
+    #     nSlides = n // 4 + ceil((n / 4) - (n // 4))
+    #     allAds.append([ad, range(1, nSlides), nSlides])
+    params={'adoption':PetAdoptionAdd}
+
+    # params = {'no_of_slides':nSlides, 'range': range(1,nSlides),'product': products}
+    # allProds = [[products, range(1, nSlides), nSlides],
+    #             [products, range(1, nSlides), nSlides]]
+    
+    # params = {'allAds':allAds}
+    print(params)
+    # return render(request, 'shop/index.html', params)
+    return render(request, 'shop/AdoptionAd.html', params)
