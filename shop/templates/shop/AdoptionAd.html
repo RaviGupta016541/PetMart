@@ -33,10 +33,10 @@
   <h3>Adoption Ads Result :</h3>
   {% for i in adoption %}
 <div class="col-xs-3 col-sm-3 col-md-3 ">
-    <div class="card" style="width: 18rem;">
+    <div class="card my-4" style="width: 18rem;">
       <img src='/media/{{i.image}}' class="card-img-top" alt="...">
         <div class="card-body">
-            <h5 class="card-title">{{i.addName}}</h5>
+            <h5 class="card-title">{{i.addName|title}}</h5>
             <p class="card-text"> {{i.state}}/{{i.city}}</p>
            
         </div>

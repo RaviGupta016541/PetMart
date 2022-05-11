@@ -141,7 +141,7 @@
           <div class="card" style="width:auto">
             <img src='/media/{{i.image}}' class="card-img-top" alt="...">
             <div class="card-body">
-              <h5 class="card-title">{{i.addName}}</h5>
+              <h5 class="card-title">{{i.addName|title}}</h5>
               <p class="card-text"> {{i.state}}/{{i.city}}</p>
               {% if i.price == 0 %}
               <br>

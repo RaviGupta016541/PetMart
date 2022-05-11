@@ -1,5 +1,6 @@
 import datetime
 from mimetypes import add_type
+from string import whitespace
 from tkinter.messagebox import Message
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
@@ -31,11 +32,6 @@ def index(request):
         n = len(ad)
         nSlides = n // 4 + ceil((n / 4) - (n // 4))
         allAds.append([ad, range(1, nSlides), nSlides])
-
-    # params = {'no_of_slides':nSlides, 'range': range(1,nSlides),'product': products}
-    # allProds = [[products, range(1, nSlides), nSlides],
-    #             [products, range(1, nSlides), nSlides]]
-    
     params = {'allAds':allAds}
     print(params)
     return render(request, 'shop/index.html', params)
