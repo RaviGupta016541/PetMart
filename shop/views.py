@@ -24,11 +24,11 @@ def index(request):
 def index(request):
     
     allAds = []
-    categoryAdds = Adds.objects.values('petCatgory', 'id')
+    categoryAdds = Adds.objects.values('petCatgory', 'id','adType')
     print(categoryAdds)
     cats = {item['petCatgory'] for item in categoryAdds}
     for cat in cats:
-        ad = Adds.objects.filter(petCatgory=cat)
+        ad = Adds.objects.filter(petCatgory=cat).exclude(adType='Lost Pets Ad')
         n = len(ad)
         nSlides = n // 4 + ceil((n / 4) - (n // 4))
         allAds.append([ad, range(1, nSlides), nSlides])
@@ -51,8 +51,7 @@ def about(request):
     return HttpResponse("this is about")
 def contact(request):
     return HttpResponse("this is contact")
-def addpost(request):
-    return HttpResponse("this is addpost")
+
 
 # to view a specific ads
 def adview(request,adid):
@@ -139,6 +138,8 @@ def saveAds(request):
         price=request.POST.get('price')
         pub_date=datetime.datetime.now().date()
         image=request.FILES['img']
+        if price=='':
+            price=0
         data=Adds(adType=adType,addName=addName,userId=userId,pub_date=pub_date,petCatgory=petCatgory,
                   addDescription =addDescription,state=state,city=city,price=price,image=image,pno=pno)
         data.save()
@@ -168,22 +169,16 @@ def handelLogout(request):
     return redirect('/')
 
 def Adoption(request):
-    allAds = []
     PetAdoptionAdd = Adds.objects.filter(adType="Pet Adoption")
     print(PetAdoptionAdd)
-    # cats = {item['petCatgory'] for item in categoryAdds}
-    # for cat in cats:
-    #     ad = Adds.objects.filter(petCatgory=cat)
-    #     n = len(ad)
-    #     nSlides = n // 4 + ceil((n / 4) - (n // 4))
-    #     allAds.append([ad, range(1, nSlides), nSlides])
     params={'adoption':PetAdoptionAdd}
-
-    # params = {'no_of_slides':nSlides, 'range': range(1,nSlides),'product': products}
-    # allProds = [[products, range(1, nSlides), nSlides],
-    #             [products, range(1, nSlides), nSlides]]
-    
-    # params = {'allAds':allAds}
     print(params)
-    # return render(request, 'shop/index.html', params)
     return render(request, 'shop/AdoptionAd.html', params)
+
+def lostPet(request):
+    lostPetAdd = Adds.objects.filter(adType="Lost Pets Ad")
+    print(lostPetAdd)
+    params={'lostPet':lostPetAdd}
+    print(params)
+    return render(request, 'shop/lostPet.html', params)
+
