@@ -4,7 +4,7 @@ from string import whitespace
 from tkinter.messagebox import Message
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from .models import Adds
+from .models import Adds, Contact
 from math import ceil
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -50,7 +50,19 @@ def search(request):
 def about(request):
     return HttpResponse("this is about")
 def contact(request):
-    return HttpResponse("this is contact")
+    if request.method=="POST":
+        name=request.POST['name']
+        email=request.POST['email']
+        phone=request.POST['phone']
+        content =request.POST['content']
+        if len(name)<2 or len(email)<3 or len(phone)<10 or len(content)<4:
+            messages.error(request, "Please fill the form correctly")
+        else:
+            contact=Contact(name=name, email=email, phone=phone, content=content)
+            contact.save()
+            messages.success(request, "Your message has been successfully sent")
+    return render(request, "shop/contactUs.html")
+    
 
 
 # to view a specific ads
