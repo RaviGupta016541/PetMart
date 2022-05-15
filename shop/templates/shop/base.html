@@ -46,9 +46,7 @@
               <a class="nav-link ml-2" aria-current="page" href="/shop/addAd">add Ad</a>
             </li>
 
-            <li class="nav-item ml-2">
-              <a class="nav-link" aria-current="page" href="/shop/blog">Blog</a>
-            </li>
+            
 
             <li class="nav-item ml-2">
               <a class="nav-link" aria-current="page" href="/shop/Adoption">Adoption Ad</a>
@@ -59,10 +57,12 @@
             </li>
 
             <li class="nav-item ml-2">
-              <a class="nav-link" href="#">about us</a>
+              <a class="nav-link" href="/shop/contact">contact us</a>
             </li>
             
-            
+            <li class="nav-item ml-2">
+              <a class="nav-link" aria-current="page" href="/blog">Blog</a>
+            </li>
           </ul>
           {% if user.is_authenticated %} 
           <ul class="navbar-nav ml-auto">
@@ -119,6 +119,7 @@
         </div>
     {% endfor %} 
 
+    
 <!-- Login Modal -->
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModal" aria-hidden="true">
   <div class="modal-dialog">
