@@ -15,6 +15,7 @@ urlpatterns = [
     path('saveAds', views.saveAds, name="saveAds"),
     path('Adoption', views.Adoption, name="Adoption"),
     path('lostPet', views.lostPet, name="lostPet"),
+    path('accessoriesAd', views.accessoriesAd, name="accessoriesAd"),
 ]
 
  

@@ -28,7 +28,7 @@ def index(request):
     print(categoryAdds)
     cats = {item['petCatgory'] for item in categoryAdds}
     for cat in cats:
-        ad = Adds.objects.filter(petCatgory=cat).exclude(adType='Lost Pets Ad')
+        ad = Adds.objects.filter(petCatgory=cat).exclude(adType='Lost Pets Ad').exclude(adType='Pet Food/Accessories Ad')
         n = len(ad)
         nSlides = n // 4 + ceil((n / 4) - (n // 4))
         allAds.append([ad, range(1, nSlides), nSlides])
@@ -95,8 +95,8 @@ def handleSignUp(request):
         pass2=request.POST['pass2']
         
         # check for errorneous input
-        if len(username)<10:
-            messages.error(request, " Your user name must be under 10 characters")
+        if len(username)<5 or len(username)>15:
+            messages.error(request, " Your user name must be under 5 to 15 characters")
             return redirect('/')
 
         if not username.isalnum():
@@ -193,4 +193,11 @@ def lostPet(request):
     params={'lostPet':lostPetAdd}
     print(params)
     return render(request, 'shop/lostPet.html', params)
+
+def accessoriesAd(request):
+    accessoriesAd = Adds.objects.filter(adType="Pet Food/Accessories Ad")
+    print(accessoriesAd)
+    params={'lostPet':accessoriesAd}
+    print(params)
+    return render(request, 'shop/accessoriesAd.html', params)
 

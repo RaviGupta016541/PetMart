@@ -1,0 +1,72 @@
+{% extends 'shop/base.html' %}
+{%block Accessories %} active{%endblock Accessories %}
+{% block css %}
+.col-md-3
+          {
+          display: inline-block;
+          margin-left:-4px;
+          }
+         
+            .btn{
+                float:right;
+                display:inline-block;
+            }
+            #category
+            {
+                color:Green;
+                font-size: 22px;
+                text-transform: uppercase;
+                float:left;
+                display:inline-block;
+                margin:0px;
+            }
+            .card-text{
+                    margin-bottom:3px;
+                }
+            .col-md-3 img{
+           
+                width: auto;
+                height: 200px;
+                }
+                #heading{
+                    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                    color:rgb(50, 50, 230);
+                    width: 30%;
+                    margin:auto;
+                    display:block;
+                    text-align:center;
+                    margin-top:35px;
+                    margin-bottom:5px;
+                }
+{% endblock %}
+{% block body %}
+<div class="container-fluid">
+  <h1 id="heading">Pet Food/Accessories Ad</h1>
+  {% for i in lostPet %}
+<div class="col-xs-3 col-sm-3 col-md-3 ">
+    <div class="card my-4" style="width: 18rem;">
+      <img src='/media/{{i.image}}' class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{i.addName|title}}</h5>
+            <p class="card-text"> {{i.state}}/{{i.city}}</p>
+            {% if i.price == 0 %}
+              <br>
+              {% else %}
+              <p class="card-text" >₹ {{i.price}}</p>
+              {% endif %}
+        </div>
+        <div class="card-footer">
+            <p id="category">{{i.petCatgory}}</P>
+                <a href="/shop/adview/{{i.id}}">
+                    <button id="vd{{i.id}}" class="btn btn-primary cart">Details</button>
+                </a>
+        </div>
+      
+
+    </div>
+</div>
+{% empty %}
+No data found
+{% endfor %}
+</div>
+{% endblock %}
