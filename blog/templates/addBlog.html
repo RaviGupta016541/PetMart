@@ -1,0 +1,54 @@
+{% extends 'shop/base.html' %}
+{%block BlogActive %}active {%endblock BlogActive %}
+{% block title%} Blog {% endblock %}
+{% block css %}
+#post{
+background-color:#F0F8FF;
+}
+.headings{ text-align:center;
+margin:15px; } 
+form{ border: 2px solid blue; padding :5px; border-radius: 10px; margin-bottom:20px;padding:5px;
+} 
+{% endblock %}
+
+{% block body %}
+
+
+<div class="container" >
+    <div class="headings">
+      <h3>PUBLISH YOUR BLOG</h3>
+      
+    </div>
+  
+    <form method="post"  enctype="multipart/form-data" action="/blog/add/saveBlog">
+      
+      {% csrf_token  %}
+        <br>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Blog title</label>
+        <input type="text" class="form-control" id="blogName" name="blogName" placeholder="Enter title here" />
+      </div>
+      
+      <div class="form-group">
+        <label for="text">content</label>
+        <textarea class="form-control" aria-label="With textarea" name="content" id="content" placeholder="Enter content here" ></textarea>
+      </div>
+      <label for="text">upload photo</label>
+      <div class="custom-file mb-3">
+        <input type="file" class="custom-file-input" accept=".jpg, .png " name="img" id="imageFile"  onchange="changeName()">
+        <label class="custom-file-label" for="validatedCustomFile" id="imageFileLable">Choose file...</label>
+        <div class="invalid-feedback">Example invalid custom file feedback</div>
+      </div>
+      
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  
+
+{% endblock %}
+{% block script %} 
+function changeName() {
+  let  namefile=$('#imageFile')[0].files[0].name;
+    document.getElementById("imageFileLable").innerHTML=namefile;
+}
+{% endblock %}
