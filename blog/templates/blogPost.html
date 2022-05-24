@@ -1,0 +1,24 @@
+{% extends 'shop/base.html' %}
+{%block BlogActive %}active {%endblock BlogActive %}
+{% block title%} Blog {% endblock %}
+{% block css %}
+img{
+    margin:5px;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+}
+
+{% endblock %}
+
+{% block body %}
+<div class="container my-3">
+    <div class="blog-post">
+            <h2 class="blog-post-title">{{post.title|title}}</h2>
+            <p class="blog-post-meta">{{post.timeStamp}} by <a href="#">{{post.author|title}}</a></p>
+            <img src='/media/{{post.image}}'>
+            <p>{{post.content}}</p>
+            <hr>
+          </div>
+          </div>
+
+{% endblock %}

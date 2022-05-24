@@ -120,16 +120,6 @@ def handleSignUp(request):
         return HttpResponse("404 - Not found")
 
 def addAd(request):
-    
-        # if user is not None:
-        #     login(request, user)
-        #     messages.success(request, "Successfully Logged In")
-        #     return redirect('/')
-        # else:
-        #     messages.error(request, "Invalid credentials! Please try again")
-        #     return redirect('/')
-
-    #return HttpResponse("404- Not found")
     if request.user.is_authenticated:
         return render(request, 'shop/addAd.html')
     else:
