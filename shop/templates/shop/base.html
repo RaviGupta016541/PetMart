@@ -42,25 +42,27 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link ml-2" aria-current="page" href="/shop/addAd">add Ad</a>
+            <li class="nav-item  {%block AddActive %} {%endblock AddActive %}">
+              <a class="nav-link ml-2" aria-current="page" href="/shop/addAd">Add Ad</a>
             </li>
 
-            
-
-            <li class="nav-item ml-2">
+            <li class="nav-item ml-2 {%block AdoptionActive %} {%endblock AdoptionActive %}">
               <a class="nav-link" aria-current="page" href="/shop/Adoption">Adoption Ad</a>
             </li>
 
-            <li class="nav-item ml-2">
+            <li class="nav-item ml-2 {%block LostActive %} {%endblock LostActive %}">
               <a class="nav-link" aria-current="page" href="/shop/lostPet">Lost Pets Ad</a>
             </li>
 
-            <li class="nav-item ml-2">
-              <a class="nav-link" href="/shop/contact">contact us</a>
+            <li class="nav-item ml-2 {%block Accessories %} {%endblock Accessories %}">
+              <a class="nav-link" aria-current="page" href="/shop/accessoriesAd">Accessories Ad</a>
+            </li>
+
+            <li class="nav-item ml-2 {%block contactActive %} {%endblock contactActive %}">
+              <a class="nav-link" href="/shop/contact">Contact us</a>
             </li>
             
-            <li class="nav-item ml-2">
+            <li class="nav-item ml-2 {%block BlogActive %} {%endblock BlogActive %}">
               <a class="nav-link" aria-current="page" href="/blog">Blog</a>
             </li>
           </ul>

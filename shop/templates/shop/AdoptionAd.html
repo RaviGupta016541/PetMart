@@ -1,4 +1,5 @@
 {% extends 'shop/base.html' %}
+{%block AdoptionActive %}active {%endblock AdoptionActive %}
 {% block css %}
 .col-md-3
           {
@@ -27,10 +28,20 @@
                 width: auto;
                 height: 200px;
                 }
+            #heading{
+                font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                color:rgb(50, 50, 230);
+                width: 20%;
+                margin:auto;
+                display:block;
+                text-align:center;
+                margin-top:35px;
+                margin-bottom:5px;
+            }
 {% endblock %}
 {% block body %}
 <div class="container-fluid">
-  <h3>Adoption Ads Result :</h3>
+  <h1 id="heading">Adoption Ads</h1>
   {% for i in adoption %}
 <div class="col-xs-3 col-sm-3 col-md-3 ">
     <div class="card my-4" style="width: 18rem;">
