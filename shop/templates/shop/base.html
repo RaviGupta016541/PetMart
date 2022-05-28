@@ -4,44 +4,42 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
     <title>{% block title%} {% endblock %}</title>
      <style>
        body{
         background-color:rgb(242, 231, 231);
        }
+       .navbar-toggler:not(:disabled):not(.disabled) {
+        cursor: pointer;
+        margin-left: auto;
+    }
        {% block css %} 
        {% endblock %}
-       
   </style>
-  
   <script> 
     {% block script %} 
-            {% endblock %}
+    {% endblock %}
   </script>
   </head>
   <body>
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container-fluid">
         <a class="navbar-brand" href="/">PetMart</a>
         <button
-          class="navbar-toggler"
+          class="navbar-toggler collapsed"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav">
             <li class="nav-item  {%block AddActive %} {%endblock AddActive %}">
               <a class="nav-link ml-2" aria-current="page" href="/shop/addAd">Add Ad</a>
             </li>
@@ -73,18 +71,10 @@
                 Welcome {{request.user}}
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/shop/logout">Logout</a>
-                
+                <a class="dropdown-item" href="/shop/logout">Logout</a> 
               </div>
             </li>
         </ul>
-
-
-        
-        
-        {% comment %} <ul> {% endcomment %}
-          
-          
           {%else%}
           <div class="ml-auto ">
           <!-- Button to  trigger Login modal -->
@@ -92,22 +82,15 @@
             Login
           </button>
           <!-- Button to  trigger sign up modal -->
-          
           <button type="button" class="btn btn-success mr-3" data-toggle="modal" data-target="#signupModal">
             SignUp
           </button>
-
         </div>
           {% endif %}
-
-
         </div>
-  
         <ul>
-
       </div>
     </nav>
-
     {% for message in messages  %}    
     {% if message.tags == "error" %}
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -120,7 +103,6 @@
           </button>
         </div>
     {% endfor %} 
-
     
 <!-- Login Modal -->
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModal" aria-hidden="true">
@@ -137,13 +119,12 @@
            {% csrf_token %} 
         <div class="form-group">
           <label for="username">Username</label>
-          <input type="text" class="form-control" id="loginusername" name="loginusername" placeholder="Choose a unique username" required>
+          <input type="text" class="form-control" id="loginusername" name="loginusername" placeholder="Enter your username" required>
         </div>
         <div class="form-group">
           <label for="pass">Enter your password </label>
           <input type="password" class="form-control" id="loginpassword" name="loginpassword" placeholder="Enter your password " required>
         </div>
- 
         <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
@@ -184,7 +165,6 @@
   <div class="form-group">
     <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Enter your password again" required>
   </div>
- 
         {% csrf_token %}
         <button type="submit" class="btn btn-primary">Submit</button>
 </form>
@@ -195,10 +175,6 @@
     </div>
   </div>
 </div>
-
-
-
-
     {% block body %} {% endblock %}
 
     <!-- Optional JavaScript -->
