@@ -1,7 +1,4 @@
 import datetime
-from mimetypes import add_type
-from string import whitespace
-from tkinter.messagebox import Message
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from .models import Adds, Contact
@@ -10,22 +7,10 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth  import authenticate,  login, logout
 
-
-# Create your views here.
-"""
+# for home page
 def index(request):
-    ads= Adds.objects.all()
-    n= len(ads) 
-    nSlides= n//4 + ceil((n/4) -(n//4))
-    params={'no_of_slides':nSlides, 'range':range(1,nSlides), 'ads': ads}
-    return render(request,"shop/index1.html", params)
-
-"""
-def index(request):
-    
     allAds = []
     categoryAdds = Adds.objects.values('petCatgory', 'id','adType')
-    print(categoryAdds)
     cats = {item['petCatgory'] for item in categoryAdds}
     for cat in cats:
         ad = Adds.objects.filter(petCatgory=cat).exclude(adType='Lost Pets Ad').exclude(adType='Pet Food/Accessories Ad')
@@ -33,22 +18,19 @@ def index(request):
         nSlides = n // 4 + ceil((n / 4) - (n // 4))
         allAds.append([ad, range(1, nSlides), nSlides])
     params = {'allAds':allAds}
-    print(params)
     return render(request, 'shop/index.html', params)
 
+#for extact data related to given data
 def search(request):
     ads= Adds.objects.all()
     if request.method=="GET":
         st=request.GET.get('search')
         if st!=None:
             ads= Adds.objects.filter(addName__icontains=st,petCatgory__icontains=st) 
-    print(ads)
     params={"searchAdd":ads}
-    print(params)
     return render(request, 'shop/search.html', params)
 
-def about(request):
-    return HttpResponse("this is about")
+# for contact page data store to database
 def contact(request):
     if request.method=="POST":
         name=request.POST['name']
@@ -63,30 +45,19 @@ def contact(request):
             messages.success(request, "Your message has been successfully sent")
     return render(request, "shop/contactUs.html")
     
-
-
 # to view a specific ads
 def adview(request,adid):
-    #return HttpResponse("this is addpview")
     ad = Adds.objects.filter(id=adid)
     ad2 = Adds.objects.filter(id=adid)\
             .values_list('userId', flat=True)
     
-    print("----")
-    #my_values = [item.userId for item in ad]
-    print(ad2[0])
-    idOfUser=Adds.userId
-    print(idOfUser)
     userdetails=User.objects.filter(id=ad2[0])
-    print(userdetails)
     params = {'Ad':ad[0],'User':userdetails[0]}
-    print("params ke anddar hai",params,params['Ad'])
     return render(request, 'shop/adview.html',params)
 
+# to handle signup details
 def handleSignUp(request):
     if request.method=="POST":
-       
-        # Get the post parameters
         username=request.POST['username']
         email=request.POST['email']
         fname=request.POST['fname']
@@ -110,15 +81,13 @@ def handleSignUp(request):
         myuser = User.objects.create_user(username, email, pass1)
         myuser.first_name= fname
         myuser.last_name= lname
-        # myuser.mobile_number=pno
         myuser.save()
-        
         messages.success(request, " Your account has been successfully created")
         return redirect('/')
-
     else:
         return HttpResponse("404 - Not found")
-
+    
+# add Ads page
 def addAd(request):
     if request.user.is_authenticated:
         return render(request, 'shop/addAd.html')
@@ -126,7 +95,7 @@ def addAd(request):
         messages.error(request, "First you need to login than you can post a Ad")
         return redirect('/')
     
-
+# save a Ad 
 def saveAds(request):
     if request.method=="POST":
         adType=request.POST.get('ChooseAd')
@@ -148,12 +117,11 @@ def saveAds(request):
         messages.success(request, "Your Ad has been successfully created")
     return render(request, 'shop/addAd.html')
 
+# to handle login details
 def handeLogin(request):
     if request.method=="POST":
-        # Get the post parameters
         loginusername=request.POST['loginusername']
         loginpassword=request.POST['loginpassword']
-
         user=authenticate(username= loginusername, password= loginpassword)
         if user is not None:
             login(request, user)
@@ -162,32 +130,29 @@ def handeLogin(request):
         else:
             messages.error(request, "Invalid credentials! Please try again")
             return redirect('/')
-
     return HttpResponse("404- Not found")
 
+# to handle logout details
 def handelLogout(request):
     logout(request)
     messages.success(request, "Successfully logged out")
     return redirect('/')
 
+#for adoption pets Ads 
 def Adoption(request):
     PetAdoptionAdd = Adds.objects.filter(adType="Pet Adoption")
-    print(PetAdoptionAdd)
     params={'adoption':PetAdoptionAdd}
-    print(params)
     return render(request, 'shop/AdoptionAd.html', params)
 
+#for lost pets Ads
 def lostPet(request):
     lostPetAdd = Adds.objects.filter(adType="Lost Pets Ad")
-    print(lostPetAdd)
     params={'lostPet':lostPetAdd}
-    print(params)
     return render(request, 'shop/lostPet.html', params)
 
+#for accessories Ads
 def accessoriesAd(request):
     accessoriesAd = Adds.objects.filter(adType="Pet Food/Accessories Ad")
-    print(accessoriesAd)
     params={'lostPet':accessoriesAd}
-    print(params)
     return render(request, 'shop/accessoriesAd.html', params)
 

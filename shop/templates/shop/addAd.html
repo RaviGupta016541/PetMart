@@ -1,26 +1,26 @@
 {% extends 'shop/base.html' %}
-
 {%block AddActive %}active {%endblock AddActive %}
-
-
-{% block css %} .headings{ text-align:center;
-margin:15px; } 
-form{ border: 2px solid blue; padding :5px; border-radius: 10px; margin-bottom:20px;padding:5px;
-} 
-{% endblock %} 
-{% block title%} Create Ad{% endblock %} 
-
+{% block css %} 
+.headings{ 
+  text-align:center;
+  margin:15px; 
+}
+form{ 
+  border: 2px solid blue; 
+  padding: 5px; 
+  border-radius: 10px; 
+  margin-bottom:20px;
+  padding:5px;
+}
+{% endblock %}
+{% block title%} Create Ad{% endblock %}
 {% block body %}
-
-
-<div class="container" >
+<div class="container">
   <div class="headings">
     <h1>PUBLISH YOUR AD NOW FOR FREE!</h1>
     <h5>ENTER YOUR AD DEFAILTS BELOW</h5>
   </div>
-
-  <form method="post"  enctype="multipart/form-data" action="/shop/saveAds">
-    {% comment %} <h6>Choose Ad Type:</h6> {% endcomment %}
+  <form method="post" enctype="multipart/form-data" action="/shop/saveAds">
     {% csrf_token  %}
     <label class="form-check-label" for="PetsSellAd"> Choose Ad Type: </label>
     <div class="row">
@@ -38,14 +38,13 @@ form{ border: 2px solid blue; padding :5px; border-radius: 10px; margin-bottom:2
       </div>
       <div class="form-check col-3 mx-3">
         <input class="form-check-input" type="radio" name="ChooseAd" id="PetFoodAccessoriesAd"
-        value="Pet Food/Accessories Ad" />
+          value="Pet Food/Accessories Ad" />
         <label class="form-check-label" for="PetFoodAccessoriesAd">
           Pet Food/Accessories Ad
         </label>
       </div>
     </div>
-  <br>
-    
+    <br>
     <div class="form-group">
       <label for="exampleInputEmail1">Ad title</label>
       <input type="text" class="form-control" id="addName" name="addName" placeholder="Enter title here" />
@@ -56,27 +55,27 @@ form{ border: 2px solid blue; padding :5px; border-radius: 10px; margin-bottom:2
     </div>
     <div class="form-group">
       <label for="text">Description</label>
-      <textarea class="form-control" aria-label="With textarea" name="addDescription" id="addDescription" placeholder="Enter Description here" ></textarea>
-      {% comment %} <input type="text" class="form-control" id="addDescription" placeholder="Enter Description here" /> {% endcomment %}
+      <textarea class="form-control" aria-label="With textarea" name="addDescription" id="addDescription"
+        placeholder="Enter Description here"></textarea>
     </div>
     <div class="form-group">
       <label for="text">State</label>
-
-      <input type="text" class="form-control" id="state" name="state" placeholder="Enter Your State" >
+      <input type="text" class="form-control" id="state" name="state" placeholder="Enter Your State">
     </div>
     <div class="form-group">
       <label for="text">City</label>
-      <input type="text" class="form-control" id="city" name="city" placeholder="Enter Your City" >
+      <input type="text" class="form-control" id="city" name="city" placeholder="Enter Your City">
     </div>
     <label for="text">Price</label>
     <div class="input-group mb-3">
       <span class="input-group-text">₹</span>
-      <input type="text" class="form-control"  name="price" placeholder="Enter selling price" aria-label="Dollar amount (with dot and two decimal places)">
+      <input type="text" class="form-control" name="price" placeholder="Enter selling price"
+        aria-label="Dollar amount (with dot and two decimal places)">
     </div>
     <label for="text">upload photo</label>
     <div class="custom-file mb-3">
-      <input type="file" class="custom-file-input" accept=".jpg, .png " name="img" id="imageFile"  onchange="changeName()">
-      {% comment %} <input type="file" class="custom-file-input" accept=".jpg, .png " name="img" id="imageFile"  > {% endcomment %}
+      <input type="file" class="custom-file-input" accept=".jpg, .png " name="img" id="imageFile"
+        onchange="changeName()">
       <label class="custom-file-label" for="validatedCustomFile" id="imageFileLable">Choose file...</label>
       <div class="invalid-feedback">Example invalid custom file feedback</div>
     </div>
@@ -87,11 +86,10 @@ form{ border: 2px solid blue; padding :5px; border-radius: 10px; margin-bottom:2
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
-
-{% endblock %}  
-{% block script %} 
+{% endblock %}
+{% block script %}
 function changeName() {
-  let  namefile=$('#imageFile')[0].files[0].name;
-    document.getElementById("imageFileLable").innerHTML=namefile;
+let namefile=$('#imageFile')[0].files[0].name;
+document.getElementById("imageFileLable").innerHTML=namefile;
 }
 {% endblock %}
